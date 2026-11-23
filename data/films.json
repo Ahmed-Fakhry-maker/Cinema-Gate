@@ -1,0 +1,98 @@
+[
+  {
+    "slug": "the-glass-observatory",
+    "title": "The Glass Observatory",
+    "releaseYear": 1974,
+    "genre": "Sci-Fi",
+    "director": "Henrik Lindqvist",
+    "runtimeMinutes": 118,
+    "country": "Sweden",
+    "posterUrl": "/src/assets/images/poster_glass_observatory_1794689778557.jpg",
+    "plotBrief": "Stationed alone for a winter rotation inside an arctic radio dome, astronomer Tomas Lind intercepts a repeating low-frequency acoustic signal bouncing off the upper ionosphere. As he isolates its harmonic structure, he realizes the waveform carries fragments of conversations from his own childhood kitchen thirty years earlier.",
+    "editorialQuote": "A glacial meditation on memory, resonance, and the solitude of listening to the sky."
+  },
+  {
+    "slug": "harbor-of-salt-and-rain",
+    "title": "Harbor of Salt & Rain",
+    "releaseYear": 2023,
+    "genre": "Drama",
+    "director": "Claire Beaumont",
+    "runtimeMinutes": 132,
+    "country": "France",
+    "posterUrl": "/src/assets/images/poster_harbor_salt_rain_1794689780310.jpg",
+    "plotBrief": "Two estranged sisters reunite at their late father's fogbound Breton shipyard to settle an unpaid maritime lien before the November auction. Over four rain-soaked days among rusting trawlers and ledger books, old silences give way to a fragile reckoning over who stayed and who left.",
+    "editorialQuote": "Unsparing, tactile, and anchored by two towering performances against the Atlantic tide."
+  },
+  {
+    "slug": "midnight-on-line-four",
+    "title": "Midnight on Line Four",
+    "releaseYear": 1958,
+    "genre": "Noir",
+    "director": "Arthur Vance",
+    "runtimeMinutes": 96,
+    "country": "United States",
+    "posterUrl": "/src/assets/images/poster_midnight_line_four_1794689779609.jpg",
+    "plotBrief": "When the 12:15 express pulls into the terminal empty, veteran subway dispatcher Frank Callahan finds a calfskin ledger wedged beneath a seat. Decoding its shorthand margins pulls him into a single relentless night across tiled platforms, precinct basements, and rain-slicked freight yards before dawn.",
+    "editorialQuote": "Sharp chiaroscuro geometry and taut procedural suspense down to the final station stop."
+  },
+  {
+    "slug": "paper-lanterns-over-kyoto",
+    "title": "Paper Lanterns over Kyoto",
+    "releaseYear": 2021,
+    "genre": "Animation",
+    "director": "Haruka Sato",
+    "runtimeMinutes": 104,
+    "country": "Japan",
+    "posterUrl": "/src/assets/images/poster_paper_lanterns_kyoto_1794689780924.jpg",
+    "plotBrief": "Apprenticed to an aging restorer of Edo-era festival mechanisms, sixteen-year-old Mei repairs a damaged cedar shadow-theater cabinet ahead of the autumn equinox. When evening rain floods the workshop courtyard, the painted paper figures step off their brass tracks to guide her through forgotten family stories.",
+    "editorialQuote": "Hand-painted watercolor frames that glow like amber light through wet shoji paper."
+  },
+  {
+    "slug": "the-cartographers-daughter",
+    "title": "The Cartographer's Daughter",
+    "releaseYear": 2019,
+    "genre": "Drama",
+    "director": "Matteo Conti",
+    "runtimeMinutes": 124,
+    "country": "Italy",
+    "posterUrl": "/src/assets/images/poster_cartographers_daughter_1794689781971.jpg",
+    "plotBrief": "Cataloguing municipal archives in post-war Turin, young archivist Lucia Ferraro notices subtle discrepancies in a set of 1943 alpine survey plates. Tracing her late father's red grease-pencil corrections reveals a secret mountain corridor charted to guide families safely across the border.",
+    "editorialQuote": "Every contour line becomes an act of quiet moral courage."
+  },
+  {
+    "slug": "echoes-in-concrete",
+    "title": "Echoes in Concrete",
+    "releaseYear": 2024,
+    "genre": "Thriller",
+    "director": "Nadia Okafor",
+    "runtimeMinutes": 111,
+    "country": "United Kingdom",
+    "posterUrl": "/src/assets/images/poster_echoes_concrete_1794689781069.jpg",
+    "plotBrief": "Commissioned to diagnose acoustic dead zones inside a newly reopened brutalist concert hall, sound engineer Maya Cole discovers that an upper gallery angle acts as a parabolic whisper chamber. Her calibration recordings accidentally capture a boardroom conspiracy tied to the hall's original demolition.",
+    "editorialQuote": "Precision sound design turns poured concrete into a living instrument of paranoia."
+  },
+  {
+    "slug": "solaris-drift",
+    "title": "Solaris Drift",
+    "releaseYear": 2022,
+    "genre": "Sci-Fi",
+    "director": "Elena Kovács",
+    "runtimeMinutes": 140,
+    "country": "Hungary",
+    "posterUrl": "/src/assets/images/poster_solaris_drift_1794689781787.jpg",
+    "plotBrief": "Three years after losing telemetry beyond the Jupiter relay, a derelict botanical freighter drifts back into range with its copper solar sails intact. A four-person salvage crew boards the silent vessel only to find its glass-domed arboretum flourishing in artificial twilight without a trace of its crew.",
+    "editorialQuote": "Patient, luminous science fiction where silence speaks louder than spectacle."
+  },
+  {
+    "slug": "velvet-alibi",
+    "title": "Velvet Alibi",
+    "releaseYear": 1966,
+    "genre": "Noir",
+    "director": "Julien Moreau",
+    "runtimeMinutes": 102,
+    "country": "France",
+    "posterUrl": "/src/assets/images/poster_velvet_alibi_1794689782699.jpg",
+    "plotBrief": "Implicated in a jewelry vault robbery just blocks from his Marseille cellar club, jazz pianist Henri Delacroix has forty-eight hours to account for a missing forty-minute gap in his evening. His only alibi lies hidden in the background room tone of a reel-to-reel rehearsal tape.",
+    "editorialQuote": "Cool smoke, brushed snare drums, and a masterclass in temporal editing."
+  }
+]

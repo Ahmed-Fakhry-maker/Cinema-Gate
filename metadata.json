@@ -1,0 +1,6 @@
+{
+  "name": "Cinema Gate",
+  "description": "A sleek movie browsing website powered by The Movie Database (TMDB) with film details, member reviews, and a personal watchlist.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
