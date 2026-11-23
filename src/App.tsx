@@ -102,16 +102,20 @@ function CinemaAppShell() {
         return;
       }
 
-      if (film.inWatchlist) {
-        await api.removeFromWatchlist(film.slug);
-      } else {
-        await api.addToWatchlist(film.slug);
+      try {
+        if (film.inWatchlist) {
+          await api.removeFromWatchlist(film.slug);
+        } else {
+          await api.addToWatchlist(film.slug);
+        }
+        setFilms((prev) =>
+          prev.map((item) =>
+            item.slug === film.slug ? { ...item, inWatchlist: !film.inWatchlist } : item,
+          ),
+        );
+      } catch (err) {
+        console.error('Failed to update watchlist:', err);
       }
-      setFilms((prev) =>
-        prev.map((item) =>
-          item.slug === film.slug ? { ...item, inWatchlist: !film.inWatchlist } : item,
-        ),
-      );
     },
     [user, openAuthModal, fetchCatalogue],
   );

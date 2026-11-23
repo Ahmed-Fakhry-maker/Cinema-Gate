@@ -72,6 +72,108 @@ export function createMemoryWatchlistStore(): WatchlistStore {
 }
 
 /**
+ * SQLite-backed watchlist store using the existing `watchlist` table in data/cinema.db.
+ * Directly maps by user's Firebase UID and film's TMDB / local ID.
+ */
+export function createSqliteWatchlistStore(db: DatabaseSync): WatchlistStore {
+  return {
+    async list(uid: string): Promise<WatchlistRecord[]> {
+      const rows = db
+        .prepare(
+          `SELECT COALESCE(f.tmdb_id, f.id) AS film_key, w.added_at
+           FROM watchlist w
+           JOIN users u ON u.id = w.user_id
+           JOIN films f ON f.id = w.film_id
+           WHERE u.firebase_uid = ?
+           ORDER BY w.added_at DESC`,
+        )
+        .all(uid) as Array<{ film_key: number; added_at: string }>;
+
+      return rows.map((r) => ({
+        filmKey: String(r.film_key),
+        addedAt: r.added_at.includes('T') ? r.added_at : new Date(`${r.added_at.replace(' ', 'T')}Z`).toISOString(),
+      }));
+    },
+
+    async add(uid: string, filmKey: string, addedAt = new Date().toISOString()): Promise<void> {
+      const user = db.prepare('SELECT id FROM users WHERE firebase_uid = ?').get(uid) as { id: number } | undefined;
+      if (!user) return;
+
+      const numericKey = Number(filmKey);
+      const film = db
+        .prepare('SELECT id FROM films WHERE tmdb_id = ? OR id = ?')
+        .get(numericKey, numericKey) as { id: number } | undefined;
+      if (!film) return;
+
+      db.prepare(
+        `INSERT OR IGNORE INTO watchlist (user_id, film_id, added_at)
+         VALUES (?, ?, ?)`,
+      ).run(user.id, film.id, addedAt);
+    },
+
+    async remove(uid: string, filmKey: string): Promise<void> {
+      const user = db.prepare('SELECT id FROM users WHERE firebase_uid = ?').get(uid) as { id: number } | undefined;
+      if (!user) return;
+
+      const numericKey = Number(filmKey);
+      const film = db
+        .prepare('SELECT id FROM films WHERE tmdb_id = ? OR id = ?')
+        .get(numericKey, numericKey) as { id: number } | undefined;
+      if (!film) return;
+
+      db.prepare('DELETE FROM watchlist WHERE user_id = ? AND film_id = ?').run(user.id, film.id);
+    },
+  };
+}
+
+/**
+ * Automatically chooses the best store: uses Firestore if credentials or an emulator are available,
+ * otherwise falls back cleanly to the local SQLite database.
+ */
+export function createAutoWatchlistStore(db: DatabaseSync): WatchlistStore {
+  const sqlite = createSqliteWatchlistStore(db);
+  if (!process.env.GOOGLE_APPLICATION_CREDENTIALS && !process.env.FIRESTORE_EMULATOR_HOST) {
+    return sqlite;
+  }
+
+  const firestore = createFirestoreWatchlistStore();
+  let firestoreDisabled = false;
+
+  return {
+    async list(uid) {
+      if (firestoreDisabled) return sqlite.list(uid);
+      try {
+        return await firestore.list(uid);
+      } catch (err) {
+        console.warn('Firestore watchlist lookup failed, falling back to SQLite:', err);
+        firestoreDisabled = true;
+        return sqlite.list(uid);
+      }
+    },
+    async add(uid, filmKey, addedAt) {
+      if (firestoreDisabled) return sqlite.add(uid, filmKey, addedAt);
+      try {
+        await firestore.add(uid, filmKey, addedAt);
+      } catch (err) {
+        console.warn('Firestore watchlist add failed, falling back to SQLite:', err);
+        firestoreDisabled = true;
+        await sqlite.add(uid, filmKey, addedAt);
+      }
+    },
+    async remove(uid, filmKey) {
+      if (firestoreDisabled) return sqlite.remove(uid, filmKey);
+      try {
+        await firestore.remove(uid, filmKey);
+      } catch (err) {
+        console.warn('Firestore watchlist remove failed, falling back to SQLite:', err);
+        firestoreDisabled = true;
+        await sqlite.remove(uid, filmKey);
+      }
+    },
+  };
+}
+
+/**
  * One-time copy of the legacy SQLite `watchlist` table into the store. Idempotent: re-running
  * never overwrites existing entries. Rows whose user has no Firebase uid (pre-migration
  * accounts that never signed in via Firebase) cannot be mapped and are counted as skipped.

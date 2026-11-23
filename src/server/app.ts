@@ -9,7 +9,7 @@ import {
   type IdTokenVerifier,
 } from './auth.ts';
 import { upsertFilmFromTmdb } from './db.ts';
-import { createFirestoreWatchlistStore, type WatchlistStore } from './watchlist.ts';
+import { createAutoWatchlistStore, type WatchlistStore } from './watchlist.ts';
 import { createTmdbClient, TmdbApiError, type TmdbClient, type TmdbMovieRecord } from './tmdb.ts';
 import type { FilmDetail, FilmSummary, ReviewItem, WatchlistEntry } from '../types/cinema.ts';
 
@@ -86,7 +86,7 @@ export function createApp(
   options?: { tmdbClient?: TmdbClient; verifyIdToken?: IdTokenVerifier; watchlistStore?: WatchlistStore },
 ): express.Express {
   const tmdb = options?.tmdbClient ?? createTmdbClient();
-  const watchlist = options?.watchlistStore ?? createFirestoreWatchlistStore();
+  const watchlist = options?.watchlistStore ?? createAutoWatchlistStore(db);
   const app = express();
   // CSP is production-only: the Vite dev server relies on inline scripts and HMR websockets.
   app.use(
