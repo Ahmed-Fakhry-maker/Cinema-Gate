@@ -62,8 +62,6 @@ function CinemaAppShell() {
     }
   }, [selectedGenre, searchQuery, sortBy, page]);
 
-  const { loading: authLoading } = useAuth();
-
   useEffect(() => {
     if (authLoading) return;
     void fetchCatalogue();
